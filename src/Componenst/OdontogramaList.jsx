@@ -72,7 +72,7 @@ const OdontogramaList = () => {
   const saveDrawing = async () => {
     const stage = stageRef.current;
     const dataUrl = stage.toDataURL();
-    const file = await dataURLToFile(dataUrl, 'drawing.png');
+    const file = await dataURLToFile(dataUrl, 'odontograma.png');
   
     const formData = new FormData();
     formData.append('image', file);
@@ -156,8 +156,27 @@ const OdontogramaList = () => {
 
   const [image] = useImage(imageUrl);
 
+  const createOdontograma = async () => {
+    // Aquí puedes agregar la lógica para crear un nuevo odontograma
+    // Por ejemplo, llamar a una API para crear el odontograma en el backend
+    try {
+      await axios.post('http://localhost:8008/api/odontograma', {
+        // datos del nuevo odontograma
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error('Error al crear el odontograma', error);
+    }
+  };
+
   return (
     <div>
+     { /*<Button 
+        label="Crear Odontograma" 
+        icon="pi pi-plus" 
+        onClick={createOdontograma}
+        style={{ marginBottom: '20px' }} 
+      />*/}
       <Accordion>
         {odontogramas.map(odontograma => (
           <AccordionTab key={odontograma.id} header={odontograma.paciente} onClick={() => setSelectedOdontograma(odontograma)}>
